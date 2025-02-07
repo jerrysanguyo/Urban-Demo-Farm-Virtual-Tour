@@ -28,4 +28,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function typeCreatedBy()
+    {
+        return $this->hasMany(Type::class, 'created_by');
+    }
+    
+    public function typeUpdatedBy()
+    {
+        return $this->hasMany(Type::class, 'updated_by');
+    }
 }
