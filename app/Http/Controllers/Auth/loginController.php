@@ -3,10 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request\Auth\LoginRequest;
+use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Services\Auth\LoginService;
 
 class loginController extends Controller
@@ -23,10 +21,9 @@ class loginController extends Controller
         return view("auth.login");
     }
 
-    public function login(LoginService $request)
+    public function login(LoginRequest $request)
     {
-        $data = $request->validated();
-        $this->loginService->login($data);
+        $this->loginService->login($request->validated());
 
         return redirect()->route(Auth::user()->role . '.dashboard')
             ->with('success', 'You are logged in');

@@ -11,15 +11,16 @@
                             style="max-width: 100px;">
                     </div>
                     <h3 class="text-center fw-bold mb-4">Login</h3>
-                    <form>
+                    <form method="POST" action="{{ route('login.check') }}">
+                        @csrf
                         <div class="mb-3">
                             <label for="email" class="form-label">Email address</label>
-                            <input type="email" class="form-control rounded-pill shadow-sm" id="email"
+                            <input type="email" name="email" class="form-control rounded-pill shadow-sm" id="email"
                                 placeholder="Enter email">
                         </div>
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
-                            <input type="password" class="form-control rounded-pill shadow-sm" id="password"
+                            <input type="password" name="password" class="form-control rounded-pill shadow-sm" id="password"
                                 placeholder="Password">
                         </div>
                         <button type="submit" class="btn btn-primary w-100 rounded-pill shadow mb-4">Login</button>
