@@ -38,4 +38,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Type::class, 'updated_by');
     }
+
+    public function itemCreatedBy()
+    {
+        return $this->hasMany(Item::class, 'created_by');
+    }
+    
+    public function itemUpdatedBy()
+    {
+        return $this->hasMany(Item::class, 'updated_by');
+    }
 }
