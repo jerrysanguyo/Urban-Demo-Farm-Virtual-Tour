@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Type;
-use Illuminate\Http\Request;
 use App\DataTables\CmsDataTable;
 use App\Services\TypeService;
 use App\Http\Requests\TypeRequest;
+use Illuminate\Support\Facades\Auth;
 
 class TypeController extends Controller
 {
@@ -21,13 +21,13 @@ class TypeController extends Controller
     {
         $title = 'Type';
         $resource = 'type';
-        $listOfType = Type::getAllTypes();
+        $data = Type::getAllTypes();
 
         return $dataTable->render('cms.index', compact(
             'dataTable',
             'title',
             'resource',
-            'listOfType'
+            'data'
         ));
     }
     
@@ -35,7 +35,8 @@ class TypeController extends Controller
     {
         $this->typeService->store($request->validated());
 
-        return redirect()->route('cms.index')
+        return redirect()
+            ->route(Auth::user()->role . '.type.index')
             ->with('success', 'You have added a type successfully!');
     }
     
@@ -54,15 +55,17 @@ class TypeController extends Controller
     {
         $this->typeService->update($request->validated(), $type);
 
-        return redirect()->route('type.edit',$type)
-            ->with('sucess', 'You have updated this type successfully!');
+        return redirect()
+            ->route(Auth::user()->role . '.type.edit',$type)
+            ->with('success', 'You have updated this type successfully!');
     }
     
     public function destroy(Type $type)
     {
         $this->typeService->destroy($type);
 
-        return redirect()->route('type.index')  
+        return redirect()
+            ->route(Auth::user()->role . '.type.index')  
             ->with('success', 'You have deleted a type successfully!');
     }
 }

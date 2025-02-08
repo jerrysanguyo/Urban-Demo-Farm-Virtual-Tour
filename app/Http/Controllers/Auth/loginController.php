@@ -25,7 +25,7 @@ class loginController extends Controller
     {
         $this->loginService->login($request->validated());
 
-        return redirect()->route('login.index')
+        return redirect()->route(Auth::user()->role . '.dashboard')
             ->with('success', 'You are logged in');
     }
 }
