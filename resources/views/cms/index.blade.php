@@ -26,12 +26,13 @@
                     </ul>
                 </div>
             @endif
-            <table class="table table-striped" id="{{ $resource }}-table">
+            <table class="table table-striped border" id="{{ $resource }}-table">
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Remarks</th>
                         @if(Request::is('superadmin/item'))
+                            <th>Type</th>
                             <th>Qr code</th>
                         @endif
                         <th>Created by</th>
@@ -45,6 +46,7 @@
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->remarks }}</td>
                             @if(Request::is('superadmin/item'))
+                                <td>{{ $item->type->name }}</td>
                                 <td>
                                     <img src="{{ asset('storage/' . $item->qr->file_path) }}" alt="QR Code" style="width: 20%;">
                                 </td>
@@ -59,17 +61,18 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="{{ route(Auth::user()->role .'.'. $resource .'.edit', $item->id) }}"
+                                            <a href="{{ route(Auth::user()->role . '.' . $resource . '.edit', $item->id) }}"
                                                 class="dropdown-item">Edit</a>
                                         </li>
                                         <li>
-                                            <a href="{{ route(Auth::user()->role .'.'. $resource .'.show', $item->id) }}"
+                                            <a href="{{ route(Auth::user()->role . '.' . $resource . '.show', $item->id) }}"
                                                 class="dropdown-item">Details</a>
                                         </li>
                                         @if(Auth::user()->role === 'superadmin')
                                             <li>
-                                                <form action="{{ route(Auth::user()->role .'.'. $resource .'.destroy', $item->id) }}" method="POST"
-                                                    class="d-inline">
+                                                <form
+                                                    action="{{ route(Auth::user()->role . '.' . $resource . '.destroy', $item->id) }}"
+                                                    method="POST" class="d-inline">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="dropdown-item"

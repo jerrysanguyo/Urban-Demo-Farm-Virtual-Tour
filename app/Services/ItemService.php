@@ -13,6 +13,7 @@ class ItemService
         return Item::create([
             'name'  =>  $data['name'],
             'remarks'  =>  $data['remarks'],
+            'type_id'   =>  $data['type_id'],
             'created_by'    =>  Auth()->id(),
             'updated_by'    =>  Auth()->id(),
         ]);
@@ -23,6 +24,7 @@ class ItemService
         $item->update([
             'name'  =>  $data['name'],
             'remarks'  =>  $data['remarks'],
+            'type_id'   =>  $data['type_id'],
             'updated_by'    =>  Auth()->id(),
         ]);
     }

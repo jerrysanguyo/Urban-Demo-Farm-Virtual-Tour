@@ -12,6 +12,7 @@ class Item extends Model
     protected $fillable = [
         'name',
         'remarks',
+        'type_id',
         'created_by',
         'updated_by'
     ];
@@ -19,6 +20,11 @@ class Item extends Model
     public static function getAllItems()
     {
         return self::all();
+    }
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'type_id');
     }
 
     public function createdBy()

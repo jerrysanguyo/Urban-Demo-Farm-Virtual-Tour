@@ -16,6 +16,7 @@ class ItemRequest extends FormRequest
         return [
             'name'  =>  'required|string|max:255',
             'remarks'   =>  'nullable|string|max:255',
+            'type_id'  =>  'required|numeric|exists:types,id',
         ];
     }
 }

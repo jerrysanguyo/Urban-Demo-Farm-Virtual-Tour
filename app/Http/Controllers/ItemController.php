@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Type;
 use App\Http\Requests\ItemRequest;
 use App\Services\ItemService;
 use App\DataTables\CmsDataTable;
@@ -22,12 +23,14 @@ class ItemController extends Controller
         $title = 'Item';
         $resource = 'item';
         $data = Item::getAllItems();
+        $subData = Type::getAllTypes();
 
         return $dataTable->render('cms.index', compact(
             'dataTable',
             'title',
             'resource',
             'data',
+            'subData',
         ));
     }
     
@@ -56,11 +59,13 @@ class ItemController extends Controller
     {
         $title = 'Item';
         $resource = 'item';
+        $subData = Type::getAllTypes();
 
         return view('cms.edit', compact(
             'item', 
             'title',
             'resource',
+            'subData'
         ));
     }
     

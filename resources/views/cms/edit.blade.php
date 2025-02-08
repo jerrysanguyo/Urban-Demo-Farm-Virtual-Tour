@@ -27,14 +27,28 @@
                         @method('PUT')
                         <span class="fs-3">{{ $title }} update</span>
                         <hr>
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
                                 <label for="name" class="form-label">{{ $resource }} name:</label>
                                 <input type="text" name="name" id="name" class="form-control"
                                     value="{{ $$resource->name }}">
                             </div>
                         </div>
-                        <div class="row">
+                        @if($resource === 'item')
+                            <div class="row mt-3">
+                                <div class="col-lg-12 col-md-12">
+                                    <label for="type_id" class="form-label text-md-end">Type:</label>
+                                    <select name="type_id" id="type_id" class="form-select">
+                                        @foreach ($subData as $mat)
+                                            <option value="{{ $mat->id }}" {{ (old('type_id', $item->type_id) == $mat->id) ? 'selected' : '' }}>
+                                                {{ $mat->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endif
+                        <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">
                                 <label for="remarks" class="form-label">Remarks:</label>
                                 <input type="text" name="remarks" id="remarks" class="form-control"

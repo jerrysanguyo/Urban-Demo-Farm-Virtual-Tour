@@ -30,4 +30,9 @@ class Type extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function item()
+    {
+        return $this->hasOne(Item::class);
+    }
 }
