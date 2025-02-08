@@ -18,9 +18,9 @@
                     <a class="nav-link" href="#">Gallery</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">QR Code Scanner</a>
+                    <a class="nav-link" href="{{ route('qr-scanner') }}">QR Code Scanner</a>
                 </li>
-                @if(Auth::user()->role === 'superadmin')
+                @if(Auth::check() && Auth::user()->role === 'superadmin')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">CMS</a>

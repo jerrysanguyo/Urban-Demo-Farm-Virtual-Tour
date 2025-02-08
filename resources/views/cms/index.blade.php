@@ -31,6 +31,9 @@
                     <tr>
                         <th>Name</th>
                         <th>Remarks</th>
+                        @if(Request::is('superadmin/item'))
+                            <th>Qr code</th>
+                        @endif
                         <th>Created by</th>
                         <th>Updated by</th>
                         <th>Action</th>
@@ -41,6 +44,11 @@
                         <tr>
                             <td>{{ $item->name }}</td>
                             <td>{{ $item->remarks }}</td>
+                            @if(Request::is('superadmin/item'))
+                                <td>
+                                    <img src="{{ asset('storage/' . $item->qr->file_path) }}" alt="QR Code" style="width: 20%;">
+                                </td>
+                            @endif
                             <td>{{ $item->createdBy->name }}</td>
                             <td>{{ $item->updatedBy->name }}</td>
                             <td>

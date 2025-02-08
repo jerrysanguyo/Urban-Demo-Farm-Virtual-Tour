@@ -42,7 +42,14 @@ class ItemController extends Controller
     
     public function show(Item $item)
     {
-        //
+        $title = 'Item';
+        $resource = 'item';
+        
+        return view('cms.details', compact(
+            'item', 
+            'title',
+            'resource',
+        ));
     }
     
     public function edit(Item $item)

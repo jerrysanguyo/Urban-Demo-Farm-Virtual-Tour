@@ -30,4 +30,9 @@ class Item extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function qr()
+    {
+        return $this->hasOne(Qr::class);
+    }
 }

@@ -8,4 +8,9 @@ class DashboardController extends Controller
     {
         return view('dashboard');
     }
+
+    public function qrScanner()
+    {
+        return view('qr-scanner');
+    }
 }

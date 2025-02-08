@@ -22,3 +22,6 @@ Route::middleware(['auth', 'check.user.role'])
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('item', ItemController::class);
 });
+
+Route::get('/item/show/{item}', [ItemController::class, 'show'])->name('item.show');
+Route::get('/qr-scanner', [DashboardController::class, 'qrScanner'])->name('qr-scanner');

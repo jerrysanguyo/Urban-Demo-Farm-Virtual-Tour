@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ItemService
 {
@@ -28,6 +29,16 @@ class ItemService
 
     public function destroy(Item $item): void
     {
+        if ($item->qr) {
+            $filePath = $item->qr->file_path;
+    
+            if (!empty($filePath) && Storage::disk('public')->exists($filePath)) {
+                Storage::disk('public')->delete($filePath);
+            }
+    
+            $item->qr->delete();
+        }
+    
         $item->delete();
     }
 }
