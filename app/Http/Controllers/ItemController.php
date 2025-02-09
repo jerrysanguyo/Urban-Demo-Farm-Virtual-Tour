@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\ItemDetail;
 use App\Models\Type;
 use App\Http\Requests\ItemRequest;
+use App\Http\Requests\ItemDetailRequest;
+use App\Services\ItemDetailService;
 use App\Services\ItemService;
 use App\DataTables\CmsDataTable;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +15,12 @@ use Illuminate\Support\Facades\Auth;
 class ItemController extends Controller
 {
     protected $itemService;
+    protected $itemDetailService;
 
-    public function __construct(ItemService $itemService)
+    public function __construct(ItemService $itemService, ItemDetailService $itemDetailService)
     {
         $this->itemService = $itemService;
+        $this->itemDetailService = $itemDetailService;
     }
 
     public function index(CmsDataTable $dataTable)
@@ -47,11 +52,13 @@ class ItemController extends Controller
     {
         $title = 'Item';
         $resource = 'item';
+        $details = ItemDetail::getItemDetails($item->id);
         
         return view('cms.details', compact(
             'item', 
             'title',
             'resource',
+            'details'
         ));
     }
     
@@ -85,5 +92,42 @@ class ItemController extends Controller
         return redirect()
             ->route(Auth::user()->role . '.item.index')
             ->with('success', 'You have successfully deleted an item!');
+    }
+    
+    // Item detail
+
+    public function detailStore(ItemDetailRequest $request, Item $item)
+    {
+        $this->itemDetailService->store($request->validated(), $item);
+
+        return redirect()
+            ->route(Auth::user()->role . '.item.show', $item)
+            ->with('success', 'You have successfully added a detail!');
+    }
+
+    public function detailEdit(ItemDetail $itemDetail, Item $item)
+    {
+        return view('itemDetail.edit', compact(
+            'itemDetail',
+            'item',
+        ));
+    }
+
+    public function detailUpdate(ItemDetailRequest $request, Item $item, ItemDetail $itemDetail)
+    {
+        $this->itemDetailService->update($request->validated(), $itemDetail);
+
+        return redirect()
+            ->route(Auth::user()->role . '.item.show', $item)
+            ->with('success', 'You have successfully added a detail!');
+    }
+
+    public function detailDestroy(ItemDetail $itemDetail, Item $item)
+    {
+        $this->itemDetailService->destroy($itemDetail);
+
+        return redirect()
+            ->route(Auth::user()->role . '.item.show', $item)
+            ->with('success', 'You have successfully deleted a detail!');
     }
 }

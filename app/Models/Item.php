@@ -41,4 +41,9 @@ class Item extends Model
     {
         return $this->hasOne(Qr::class);
     }
+
+    public function detail()
+    {
+        return $this->hasMany(ItemDetail::class);
+    } 
 }

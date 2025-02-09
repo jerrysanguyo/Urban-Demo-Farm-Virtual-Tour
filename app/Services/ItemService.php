@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Item;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class ItemService
