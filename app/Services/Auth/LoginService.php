@@ -12,4 +12,13 @@ class LoginService
             'password'=> $data['password'],
         ]);
     }
+
+    public function logout(): bool
+    {
+        Auth::logout(); 
+        request()->session()->invalidate(); 
+        request()->session()->regenerateToken();
+    
+        return true;
+    }
 }

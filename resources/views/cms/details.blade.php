@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="d-flex justify-content-between">
                             <span class="fs-3">{{ $item->name }}</span>
-                            @if(Auth::user()->role === 'superadmin')
+                            @if(Auth::check() && Auth::user()->role === 'superadmin')
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#itemDetailCreate">
                                     Add detail
@@ -43,7 +43,7 @@
                                             <div class="col-12">
                                                 <div class="d-flex justify-content-between">
                                                     <span class="fs-4">{{ $detail->title }}</span>
-                                                    @if (Auth::user()->role === 'superadmin')
+                                                    @if (Auth::check() && Auth::user()->role === 'superadmin')
                                                         <div class="dropdown">
                                                             <a href="" class="btn btn-primary dropdown-toggle" role="button"
                                                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -54,7 +54,7 @@
                                                                     <a href="#"
                                                                         class="dropdown-item">Edit</a>
                                                                 </li>
-                                                                @if(Auth::user()->role === 'superadmin')
+                                                                @if(Auth::check() && Auth::user()->role === 'superadmin')
                                                                     <li>
                                                                         <form
                                                                             action="#"

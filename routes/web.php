@@ -10,8 +10,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('login', LoginController::class)->only(['index']);
-Route::post('/login/check', [LoginController::class, 'login'])->name('login.check');
+Route::resource('login', LoginController::class)
+    ->only(['index']);
+Route::post('/login/check', [LoginController::class, 'login'])
+    ->name('login.check');
+Route::post('/logout', [LoginController::class, 'logout'])
+    ->name('logout');
 
 Route::middleware(['auth', 'check.user.role'])
     ->prefix('superadmin')
@@ -30,5 +34,7 @@ Route::middleware(['auth', 'check.user.role'])
             ->name('itemDetail.destroy');
     });
 
-Route::get('/item/show/{item}', [ItemController::class, 'show'])->name('item.show');
-Route::get('/qr-scanner', [DashboardController::class, 'qrScanner'])->name('qr-scanner');
+Route::get('/item/show/{item}', [ItemController::class, 'show'])
+    ->name('item.show');
+Route::get('/qr-scanner', [DashboardController::class, 'qrScanner'])
+    ->name('qr-scanner');

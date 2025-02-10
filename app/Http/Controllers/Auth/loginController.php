@@ -25,7 +25,17 @@ class loginController extends Controller
     {
         $this->loginService->login($request->validated());
 
-        return redirect()->route(Auth::user()->role . '.dashboard')
+        return redirect()
+            ->route(Auth::user()->role . '.dashboard')
             ->with('success', 'You are logged in');
+    }
+
+    public function logout()
+    {
+        $this->loginService->logout();
+
+        return redirect()
+            ->route('login.index')
+            ->with('success', 'You have logout successfullly!');
     }
 }
