@@ -30,6 +30,7 @@
                             <li><a class="dropdown-item" href="{{ route(Auth::user()->role . '.item.index') }}">Items</a>
                             </li>
                             <li><a class="dropdown-item" href="#">Events</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf

@@ -22,7 +22,7 @@ class ItemDetailService
     {
         $itemDetail->update([
             'title'     =>  $data['title'],
-            'detail'    =>  $data['detail'],
+            'details'    =>  $data['details'],
             'updated_by'    =>  Auth()->id(),
         ]);
     }

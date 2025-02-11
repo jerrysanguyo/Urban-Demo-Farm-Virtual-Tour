@@ -105,7 +105,7 @@ class ItemController extends Controller
             ->with('success', 'You have successfully added a detail!');
     }
 
-    public function detailEdit(ItemDetail $itemDetail, Item $item)
+    public function detailEdit(Item $item, ItemDetail $itemDetail)
     {
         return view('itemDetail.edit', compact(
             'itemDetail',
@@ -122,7 +122,7 @@ class ItemController extends Controller
             ->with('success', 'You have successfully added a detail!');
     }
 
-    public function detailDestroy(ItemDetail $itemDetail, Item $item)
+    public function detailDestroy( Item $item, ItemDetail $itemDetail)
     {
         $this->itemDetailService->destroy($itemDetail);
 

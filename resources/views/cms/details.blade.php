@@ -51,13 +51,13 @@
                                                             </a>
                                                             <ul class="dropdown-menu">
                                                                 <li>
-                                                                    <a href="#"
+                                                                    <a href="{{ route(Auth::user()->role . '.itemDetail.edit', ['item' => $item->id, 'itemDetail' => $detail->id]) }}"
                                                                         class="dropdown-item">Edit</a>
                                                                 </li>
                                                                 @if(Auth::check() && Auth::user()->role === 'superadmin')
                                                                     <li>
                                                                         <form
-                                                                            action="#"
+                                                                            action="{{ route(Auth::user()->role . '.itemDetail.destroy', ['item' => $item->id, 'itemDetail' => $detail->id]) }}"
                                                                             method="POST" class="d-inline">
                                                                             @csrf
                                                                             @method('DELETE')
