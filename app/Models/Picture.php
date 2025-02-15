@@ -12,11 +12,14 @@ class Picture extends Model
     protected $fillable = [
         'file_name',
         'file_path',
-        'picture_name',
-        'type',
         'created_by',
         'updated_by'
     ];
+
+    public function picturable()
+    {
+        return $this->morpthTo();
+    }
 
     public function createdBy()
     {

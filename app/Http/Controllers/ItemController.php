@@ -41,7 +41,9 @@ class ItemController extends Controller
     
     public function store(ItemRequest $request)
     {
-        $this->itemService->store($request->validated());
+        $data = $request->validated();
+        $data['picture'] = $request->file('picture');
+        $this->itemService->store($data);
 
         return redirect()
             ->route(Auth::user()->role . '.item.index')
