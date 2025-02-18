@@ -100,7 +100,9 @@ class ItemController extends Controller
 
     public function detailStore(ItemDetailRequest $request, Item $item)
     {
-        $this->itemDetailService->store($request->validated(), $item);
+        $data = $request->validated();
+        $data['picture'] = $request->file('picture');
+        $this->itemDetailService->store($data, $item);
 
         return redirect()
             ->route(Auth::user()->role . '.item.show', $item)
