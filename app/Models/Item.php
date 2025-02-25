@@ -53,12 +53,18 @@ class Item extends Model
         return $this->hasMany(ItemDetail::class);
     }
 
+    public function subDescription()
+    {
+        return $this->hasMany(SubDescription::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
 
         static::deleting(function ($item) {
-            if ($item->qr) {
+            if ($item->qr)
+            {
                 $qr_file_path = str_replace('storage/', '', $item->qr->file_path);
                 if (!empty($qr_file_path) && Storage::disk('public')->exists($qr_file_path)) {
                     Storage::disk('public')->delete($qr_file_path);
@@ -66,17 +72,16 @@ class Item extends Model
                 $item->qr->delete();
             }
 
-            if ($item->picture) {
+            if ($item->picture)
+            {
                 $pic_file_path = str_replace('storage/', '', $item->picture->file_path);
                 if (!empty($pic_file_path) && Storage::disk('public')->exists($pic_file_path)) {
                     Storage::disk('public')->delete($pic_file_path);
                 }
                 $item->picture->delete();
             }
-
-            if ($item->detail()->exists()) {
-                $item->detail()->delete();
-            }
+            $item->detail()->delete();
+            $item->subDescription()->delete();
         });
     }
 }

@@ -15,7 +15,7 @@ class ItemDetailRequest extends FormRequest
     {
         return [
             'title'     => 'required|string|max:255',
-            'details'   =>  'required|string|max:1500',
+            'details'   =>  'nullable|string|max:1500',
         ];
     }
 }

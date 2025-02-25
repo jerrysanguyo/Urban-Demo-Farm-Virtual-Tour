@@ -11,9 +11,9 @@
 </div>
 <div class="container my-5">
     <div class="row text-center">
-        <div class="col-md-4">
+        <div class="col-md-4 tw-bg-red-500 text-white p-4">
             <h2>Farm Overview</h2>
-            <p>The farm sits on a 2,500-hectare land beside Lakeshore Hall, Barangay Lower Bicutan. It integrates
+            <p >The farm sits on a 2,500-hectare land beside Lakeshore Hall, Barangay Lower Bicutan. It integrates
                 different kinds of urban farming setups – from gardens that showcase space-saving vertical farming to
                 wooden rack and pole gardens.</p>
         </div>

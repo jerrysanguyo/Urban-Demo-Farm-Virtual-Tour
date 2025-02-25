@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\SubDescriptionController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -32,6 +33,14 @@ Route::middleware(['auth', 'check.user.role'])
             ->name('itemDetail.update');
         Route::delete('/item/destroy/{item}/{itemDetail}', [ItemController::class, 'detailDestroy'])
             ->name('itemDetail.destroy');
+        Route::post('/item/sub-description/store/{itemDetail}/{item}', [ItemController::class, 'subDescriptionStore'])
+            ->name('subDescription.store');
+        Route::get('/item/sub-description/edit/{subDescription}/{itemDetail}', [ItemController::class, 'subDescriptionEdit'])
+            ->name('subDescription.edit');
+        Route::put('/item/sub-description/update/{subDescription}/{itemDetail}/{item}', [ItemController::class, 'subDescriptionUpdate'])
+            ->name('subDescription.update');
+        Route::delete('/item/sub-description/destroy/{subDescription}/{itemDetail}/{item}', [ItemController::class, 'subDescriptionDestroy'])
+            ->name('subDescription.destroy');
     });
 
 Route::get('/item/show/{item}', [ItemController::class, 'show'])

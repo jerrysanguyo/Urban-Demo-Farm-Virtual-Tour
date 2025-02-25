@@ -11,6 +11,9 @@
         @vite(['resources/css/app.css', 'resources/css/welcome.css'])
     @endif
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+    <script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+
 </head>
 
 <body>

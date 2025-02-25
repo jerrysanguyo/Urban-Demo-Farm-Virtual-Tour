@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('sub_descriptions', function (Blueprint $table) {
             $table->id();
             $table->foreignId('item_detail_id')->contraned('item_details');
+            $table->foreignId('item_id')->contraned('items');
             $table->longText('description');
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->constrained('users');

@@ -4,12 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class ItemDetail extends Model
 {
     use HasFactory;
     protected $table = 'item_details';
-    protected $fillable= [
+    protected $fillable = [
         'item_id',
         'title',
         'details',
@@ -19,7 +20,7 @@ class ItemDetail extends Model
 
     public static function getItemDetails($item)
     {
-        return self::where('item_id', $item)->get();    
+        return self::where('item_id', $item)->get();
     }
 
     public function picture()
@@ -42,12 +43,24 @@ class ItemDetail extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
+    public function subDescription()
+    {
+        return $this->hasMany(SubDescription::class);
+    }
+
     public static function boot()
     {
         parent::boot();
 
         static::deleting(function ($itemDetail) {
-            $itemDetail->picture()->delete();
+            if ($itemDetail->picture) {
+                $det_file_path = str_replace('storage/', '', $itemDetail->picture->file_path);
+                if (!empty($det_file_path) && Storage::disk('public')->exists($det_file_path)) {
+                    Storage::disk('public')->delete($det_file_path);
+                }
+                $itemDetail->picture->delete();
+            }
+            $itemDetail->subDescription()->delete();
         });
     }
 }
