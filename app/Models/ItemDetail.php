@@ -22,6 +22,11 @@ class ItemDetail extends Model
         return self::where('item_id', $item)->get();    
     }
 
+    public function picture()
+    {
+        return $this->morphOne(Picture::class, 'picturable');
+    }
+
     public function item()
     {
         return $this->belongsTo(Item::class, 'item_id');
@@ -37,8 +42,12 @@ class ItemDetail extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function subDetail()
+    public static function boot()
     {
-        return $this->hasMany(SubDescription::class);
+        parent::boot();
+
+        static::deleting(function ($itemDetail) {
+            $itemDetail->picture()->delete();
+        });
     }
 }

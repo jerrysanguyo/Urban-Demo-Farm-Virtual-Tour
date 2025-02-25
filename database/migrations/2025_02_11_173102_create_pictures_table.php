@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('file_name');
             $table->string('file_path');
-            $table->string('picture_name');
-            $table->enum('type', ['item', 'itemDetail']);
+            $table->morphs('picturable');
             $table->foreignId('created_by')->constrained('users');
             $table->foreignId('updated_by')->constrained('users');
             $table->timestamps();

@@ -48,7 +48,7 @@
                                 @if(Request::is('superadmin/item'))
                                     <td>{{ $item->type->name }}</td>
                                     <td>
-                                        <img src="{{ asset('storage/' . (optional($item->qr)->file_path ?: 'default.png')) }}"
+                                        <img src="{{ optional($item->qr)->file_path ? asset('storage/' . $item->qr->file_path) : asset('default-qr.png') }}"
                                             alt="QR Code" style="width: 20%;">
                                     </td>
                                 @endif

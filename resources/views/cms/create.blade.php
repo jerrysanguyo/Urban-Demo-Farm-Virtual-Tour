@@ -2,7 +2,7 @@
     aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="{{ route(Auth::user()->role . '.' . $resource . '.store') }}">
+            <form method="POST" action="{{ route(Auth::user()->role . '.' . $resource . '.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="create{{ $resource }}Label">{{ $title }} creation</h1>
@@ -26,6 +26,12 @@
                                         <option value="{{ $mat->id }}">{{ $mat->name }}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <label for="picture" class="col-md-4 col-form-label text-md-end" name="picture">{{ __('Picture') }}</label>
+                            <div class="col-md-6">
+                                <input type="file" name="picture" id="picture" class="form-control">
                             </div>
                         </div>
                     @endif

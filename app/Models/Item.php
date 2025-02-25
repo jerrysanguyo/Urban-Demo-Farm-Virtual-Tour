@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Item extends Model
 {
@@ -20,6 +21,11 @@ class Item extends Model
     public static function getAllItems()
     {
         return self::all();
+    }
+
+    public function picture()
+    {
+        return $this->morphOne(Picture::class, 'picturable');
     }
 
     public function type()
@@ -45,5 +51,32 @@ class Item extends Model
     public function detail()
     {
         return $this->hasMany(ItemDetail::class);
-    } 
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($item) {
+            if ($item->qr) {
+                $qr_file_path = str_replace('storage/', '', $item->qr->file_path);
+                if (!empty($qr_file_path) && Storage::disk('public')->exists($qr_file_path)) {
+                    Storage::disk('public')->delete($qr_file_path);
+                }
+                $item->qr->delete();
+            }
+
+            if ($item->picture) {
+                $pic_file_path = str_replace('storage/', '', $item->picture->file_path);
+                if (!empty($pic_file_path) && Storage::disk('public')->exists($pic_file_path)) {
+                    Storage::disk('public')->delete($pic_file_path);
+                }
+                $item->picture->delete();
+            }
+
+            if ($item->detail()->exists()) {
+                $item->detail()->delete();
+            }
+        });
+    }
 }
