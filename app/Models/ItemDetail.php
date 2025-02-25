@@ -36,4 +36,9 @@ class ItemDetail extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function subDetail()
+    {
+        return $this->hasMany(SubDescription::class);
+    }
 }

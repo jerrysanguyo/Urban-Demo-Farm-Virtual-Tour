@@ -5,20 +5,26 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class SubDescription extends Model
 {
     use HasFactory;
-    protected $table = 'types';
+
+    protected $table  = 'sub_descriptions';
     protected $fillable = [
-        'name',
-        'remarks',
+        'item_detail_id',
+        'description',
         'created_by',
-        'updated_by'
+        'updated_by',
     ];
-    
-    public static function getAllTypes()
+
+    public static function getSubDescription($subDescription)
     {
-        return self::all();
+        return self::where('item_detail_id', $subDescription)->get();
+    }
+
+    public function itemDetail()
+    {
+        return $this->belongsTo(ItemDetail::class, 'item_detail_id');
     }
 
     public function createdBy()
@@ -29,10 +35,5 @@ class Type extends Model
     public function updatedBy()
     {
         return $this->belongsTo(User::class, 'updated_by');
-    }
-
-    public function item()
-    {
-        return $this->hasOne(Item::class);
     }
 }

@@ -33,7 +33,8 @@ class TypeController extends Controller
     
     public function store(TypeRequest $request)
     {
-        $this->typeService->store($request->validated());
+        $data = $request->validated();
+        $this->typeService->store($data);
 
         return redirect()
             ->route(Auth::user()->role . '.type.index')
