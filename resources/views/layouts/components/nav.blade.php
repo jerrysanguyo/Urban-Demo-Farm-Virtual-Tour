@@ -11,15 +11,6 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Gallery</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('qr-scanner') }}">QR Code Scanner</a>
-                </li>
                 @if(Auth::check() && Auth::user()->role === 'superadmin')
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"

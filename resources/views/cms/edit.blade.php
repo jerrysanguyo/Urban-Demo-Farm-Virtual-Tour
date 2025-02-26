@@ -5,20 +5,7 @@
 <div class="container">
     <div class="d-flex justify-content-center mt-5">
         <div class="col-lg-6">
-            @if(session('success'))
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
+            @include('cms.components.alert')
             <div class="card shadow border">
                 <div class="card-body">
                     <form action="{{ route(Auth::user()->role . '.' . $resource . '.update', $$resource->id) }}"
@@ -35,18 +22,19 @@
                             </div>
                         </div>
                         @if($resource === 'item')
-                            <div class="row mt-3">
-                                <div class="col-lg-12 col-md-12">
-                                    <label for="type_id" class="form-label text-md-end">Type:</label>
-                                    <select name="type_id" id="type_id" class="form-select">
-                                        @foreach ($subData as $mat)
-                                            <option value="{{ $mat->id }}" {{ (old('type_id', $item->type_id) == $mat->id) ? 'selected' : '' }}>
-                                                {{ $mat->name }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-12 col-md-12">
+                                <label for="type_id" class="form-label text-md-end">Type:</label>
+                                <select name="type_id" id="type_id" class="form-select">
+                                    @foreach ($subData as $mat)
+                                    <option value="{{ $mat->id }}"
+                                        {{ (old('type_id', $item->type_id) == $mat->id) ? 'selected' : '' }}>
+                                        {{ $mat->name }}
+                                    </option>
+                                    @endforeach
+                                </select>
                             </div>
+                        </div>
                         @endif
                         <div class="row mt-3">
                             <div class="col-lg-12 col-md-12">

@@ -12,20 +12,7 @@
         </div>
         <div class="card shadow border">
             <div class="card-body">
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                @include('cms.components.alert')
                 <table class="table table-striped border" id="{{ $resource }}-table">
                     <thead>
                         <tr>
@@ -49,7 +36,7 @@
                                     <td>{{ $item->type->name }}</td>
                                     <td>
                                         <img src="{{ optional($item->qr)->file_path ? asset('storage/' . $item->qr->file_path) : asset('default-qr.png') }}"
-                                            alt="QR Code" style="width: 20%;">
+                                            alt="QR Code" style="width: 50%;">
                                     </td>
                                 @endif
                                 <td>{{ $item->createdBy->name }}</td>

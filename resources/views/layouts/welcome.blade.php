@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Haven - Embrace Nature</title>
-    @if (Request::is('login'))
+    @if (Request::is('login') || Request::is('/'))
         @vite(['resources/css/app.css', 'resources/css/login.css'])
     @else
         @vite(['resources/css/app.css', 'resources/css/welcome.css'])

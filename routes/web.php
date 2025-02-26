@@ -8,11 +8,23 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\SubDescriptionController;
 
 Route::get('/', function () {
-    return view('welcome');
+    if(Auth::check())
+    {
+        return redirect()
+            ->route(Auth::user()->role . '.dashboard');
+    }
+    return redirect('login');
 });
 
-Route::resource('login', LoginController::class)
-    ->only(['index']);
+Route::get('/login', function () {
+    if (Auth::check()) 
+    {
+        return redirect()
+            ->route(Auth::user()->role . '.dashboard');
+    }
+    return view('auth.login');
+})->name('login.index');
+
 Route::post('/login/check', [LoginController::class, 'login'])
     ->name('login.check');
 Route::post('/logout', [LoginController::class, 'logout'])

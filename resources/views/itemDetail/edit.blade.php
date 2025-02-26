@@ -5,20 +5,7 @@
 <div class="container">
     <div class="d-flex justify-content-center mt-5">
         <div class="col-lg-8">
-            @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-            @endif
-            @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-            @endif
+            @include('cms.components.alert')
             <div class="card shadow border">
                 <div class="card-header">
                     <div class="d-flex justify-content-between">

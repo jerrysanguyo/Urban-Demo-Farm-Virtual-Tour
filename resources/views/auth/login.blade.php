@@ -2,11 +2,6 @@
 
 @section('content')
 <div class="container d-flex align-items-center justify-content-center min-vh-100">
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
     <div class="card shadow-lg border-0 rounded-4" style="width: 100%; max-width: 600px;">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -16,6 +11,7 @@
                             style="max-width: 100px;">
                     </div>
                     <h3 class="text-center fw-bold mb-4">Login</h3>
+                    @include('cms.components.alert')
                     <form method="POST" action="{{ route('login.check') }}">
                         @csrf
                         <div class="mb-3">
