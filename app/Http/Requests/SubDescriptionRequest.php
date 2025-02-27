@@ -14,7 +14,8 @@ class SubDescriptionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'description'   =>  'required|string|max:1000',
+            'description'   =>  'required|array',
+            'description.*' => 'required|string|max:1000',
         ];
     }
 }

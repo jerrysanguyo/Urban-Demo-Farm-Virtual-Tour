@@ -28,6 +28,9 @@
                                     <button type="submit" class="dropdown-item">Logout</button>
                                 </form>
                             </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route(Auth::user()->role . '.storage.link') }}">Storage link</a>
+                            </li>
                         </ul>
                     </li>
                 @endif

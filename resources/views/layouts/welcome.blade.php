@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant Haven - Embrace Nature</title>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-B0dONUtb.css') }}">
+    <script src="{{ asset('build/assets/app--KqnoJvy.js') }}"></script>
     @if (Request::is('login') || Request::is('/'))
-        @vite(['resources/css/app.css', 'resources/css/login.css'])
+    <link rel="stylesheet" href="{{ asset('css/login.css') }}">
     @else
-        @vite(['resources/css/app.css', 'resources/css/welcome.css'])
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}">
     @endif
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
@@ -18,13 +20,12 @@
 
 <body>
     @if (!Request::is('login'))
-        @include('layouts.components.nav')
+    @include('layouts.components.nav')
     @endif
     <!-- Page Content -->
     <div>
         @yield('content')
     </div>
-    @vite('resources/js/app.js')
     @stack('scripts')
 </body>
 

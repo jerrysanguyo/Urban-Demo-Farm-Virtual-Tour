@@ -18,9 +18,9 @@ class SubDescription extends Model
         'updated_by',
     ];
 
-    public static function getSubDescription($item)
+    public static function getSubDescription($itemDetail)
     {
-        return self::where('item_id', $item)->get();
+        return self::where('item_detail_id', $itemDetail)->get();
     }
 
     public function itemDetail()

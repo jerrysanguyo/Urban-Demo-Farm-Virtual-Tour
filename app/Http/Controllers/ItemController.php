@@ -60,14 +60,12 @@ class ItemController extends Controller
         $title = 'Item';
         $resource = 'item';
         $details = ItemDetail::getItemDetails($item->id);
-        $subDetails = SubDescription::getSubDescription($item->id);
         
         return view('cms.details', compact(
             'item', 
             'title',
             'resource',
             'details',
-            'subDetails'
         ));
     }
     
@@ -125,7 +123,7 @@ class ItemController extends Controller
 
     public function detailEdit(Item $item, ItemDetail $itemDetail)
     {
-        $subDescriptions = SubDescription::getSubDescription($item->id);
+        $subDescriptions = SubDescription::getSubDescription($itemDetail->id);
 
         return view('itemDetail.edit', compact(
             'itemDetail',

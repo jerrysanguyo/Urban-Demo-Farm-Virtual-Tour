@@ -55,6 +55,9 @@
                             <span class="fs-6 text-center">{{ $detail->details }}</span>
                             <ul>
                                 @if ($detail->details === NULL)
+                                @php
+                                $subDetails = \App\Models\SubDescription::getSubDescription($detail->id);
+                                @endphp
                                 @foreach ($subDetails as $subDetail)
                                 <li class="fs-6">
                                     {{ $subDetail->description }}
@@ -68,7 +71,7 @@
             </div>
         </div>
         @if ($item->detail && Auth::check())
-            @include('cms.modal.create-itemSubDescription')
+        @include('cms.modal.create-itemSubDescription')
         @endif
         @endforeach
     </div>

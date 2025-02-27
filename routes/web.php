@@ -34,6 +34,8 @@ Route::middleware(['auth', 'check.user.role'])
     ->prefix('superadmin')
     ->name('superadmin.')
     ->group(function () {
+        Route::get('/storage-link', [DashboardController::class, 'storageLink'])
+            ->name('storage.link');
         Route::resource('type', TypeController::class);
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::resource('item', ItemController::class);
