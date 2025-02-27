@@ -53,6 +53,8 @@ Route::middleware(['auth', 'check.user.role'])
             ->name('subDescription.update');
         Route::delete('/item/sub-description/destroy/{subDescription}/{itemDetail}/{item}', [ItemController::class, 'subDescriptionDestroy'])
             ->name('subDescription.destroy');
+        Route::get('/item/qr/{item}', [ItemController::class, 'showQr'])
+            ->name('item.qr');
     });
 
 Route::get('/item/show/{item}', [ItemController::class, 'show'])

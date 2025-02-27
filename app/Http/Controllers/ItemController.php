@@ -103,6 +103,13 @@ class ItemController extends Controller
             ->with('success', 'You have successfully deleted an item!');
     }
     
+    public function showQr(Item $item)
+    {
+        return view('qr.index', compact(
+            'item',
+        ));
+    }
+    
     // Item detail
 
     public function detailStore(ItemDetailRequest $request, Item $item)
