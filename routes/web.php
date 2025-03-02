@@ -30,6 +30,9 @@ Route::post('/login/check', [LoginController::class, 'login'])
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
+Route::get('/home', [DashboardController::class, 'home'])
+    ->name('home');
+
 Route::middleware(['auth', 'check.user.role'])
     ->prefix('superadmin')
     ->name('superadmin.')

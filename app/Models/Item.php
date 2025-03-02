@@ -18,6 +18,11 @@ class Item extends Model
         'updated_by'
     ];
 
+    public static function specificItem($query)
+    {
+        return self::where('name', 'LIKE', '%' . $query . '%')->get();
+    }
+
     public static function getAllItems()
     {
         return self::all();

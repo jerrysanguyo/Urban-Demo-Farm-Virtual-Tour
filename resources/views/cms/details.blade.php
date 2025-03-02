@@ -18,6 +18,9 @@
                             </button>
                             @include('cms.modal.create-details')
                             @endif
+                            <a href="{{ route('home') }}">
+                                <button class="btn btn-primary">Back</button>
+                            </a>
                         </div>
                     </div>
                     <hr>

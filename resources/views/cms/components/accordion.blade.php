@@ -6,7 +6,8 @@
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
                     data-bs-target="#collapse{{ $detail->id }}" aria-expanded="false"
                     aria-controls="collapse{{ $detail->id }}">
-                    {{ $detail->title }}
+                    {{ strtoupper($detail->title) }}
+                    
                 </button>
             </h2>
             <div id="collapse{{ $detail->id }}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">

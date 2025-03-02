@@ -33,3 +33,9 @@ body {
 .logo-img {
     width: 5%;
 }
+
+@media (max-width: 576px) {
+    .logo-img {
+        width: 15%;
+    }
+}
